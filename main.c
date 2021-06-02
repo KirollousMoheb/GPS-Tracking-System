@@ -3,7 +3,18 @@
 void SystemInit(){};
 
 
+void InitPortE(){      // Function to initialize port E
+	
+				SYSCTL_RCGCGPIO_R|= 0x10;  
+				GPIO_PORTE_LOCK_R=0x4C4F434B;
+				GPIO_PORTE_CR_R = 0x0E;                
+				GPIO_PORTE_AMSEL_R = 0x00;        
+				GPIO_PORTE_PCTL_R = 0x00;   
+				GPIO_PORTE_DIR_R = 0x0E;     //PE3==>third 7segments  , PE2==>Second 7segments, PE1==>first 7segments  
+				GPIO_PORTE_PUR_R = 0x00;              
+				GPIO_PORTE_DEN_R = 0x0E;  
 
+}
 
 
 
@@ -25,7 +36,8 @@ void RedLedOn(){//Function to turn the red led once the distance exceeded 100m
 
 
 int main(void)
-{			 		 
+{			 	
+	                         InitPortE();
 			while(1)
 				 {				
 				 }
