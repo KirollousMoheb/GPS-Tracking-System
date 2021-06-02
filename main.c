@@ -17,6 +17,23 @@ void InitPortE(){      // Function to initialize port E
 }
 
 
+//PORTB initialization
+void InitPortB(){
+				
+	SYSCTL_RCGCGPIO_R |= 0x02;
+        GPIO_PORTB_LOCK_R=0x4C4F434B; 	
+	GPIO_PORTB_CR_R = 0x7F;                 
+	GPIO_PORTB_AMSEL_R = 0x00;        
+	GPIO_PORTB_PCTL_R = 0x00;    
+	GPIO_PORTB_DIR_R = 0x7F;          			
+	GPIO_PORTB_PUR_R = 0x00;                
+	GPIO_PORTB_DEN_R = 0x7F;     
+
+}
+
+
+
+
 
 
 
@@ -38,6 +55,8 @@ void RedLedOn(){//Function to turn the red led once the distance exceeded 100m
 int main(void)
 {			 	
 	                         InitPortE();
+	                         InitPortB();
+	
 			while(1)
 				 {				
 				 }
