@@ -1,6 +1,7 @@
 #include "stdint.h"
 #include "tm4c123gh6pm.h"
 unsigned char segment1,segment2,segment3;
+unsigned char values[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
 int distance=179;//dumy number 
 void SystemInit(){};
 
@@ -62,6 +63,13 @@ void SplitDistance(int distance){
     
 }
 
+void show(int digit, char value){
+	
+	GPIO_PORTB_DATA_R = 0x00;		// Turns off LEDs
+	GPIO_PORTE_DATA_R = digit;		// Selects segment to turn on
+	GPIO_PORTB_DATA_R = ~values[value];	// Turns on number in selected digit
+		
+	 } 
 
 int main(void)
 {			 	
@@ -70,6 +78,12 @@ int main(void)
 	
 	while(1)
 		 {
+		
+		SplitDistance(distance);
+		show(8,segment3);
+		show(4,segment2);
+		show(2,segment1);
+		
 		if(distance>100){
 		    RedLedOn();
 		 }
