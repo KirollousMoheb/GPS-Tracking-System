@@ -1,5 +1,6 @@
 #include "stdint.h"
 #include "tm4c123gh6pm.h"
+#define pi 3.14159265358979323846
 unsigned char segment1,segment2,segment3;
 unsigned char values[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
 int distance=179;//dumy number 
@@ -21,6 +22,11 @@ double getInDegree(double value) {
 
 
 }
+
+double degToRad(double degree) {
+    return degree * (pi / 180.0);
+}
+
 void InitPortE(){      // Function to initialize port E
 	
 	SYSCTL_RCGCGPIO_R|= 0x10;  
