@@ -6,6 +6,14 @@ int distance=179;//dumy number
 void SystemInit(){};
 
 
+void delay(void){
+	
+	unsigned long volatile time;
+	time = 727240*200/91000; 		 // 0.1 ms
+	while(time){
+	time--;
+  }
+}
 
 void InitPortE(){      // Function to initialize port E
 	
@@ -68,7 +76,7 @@ void show(int digit, char value){
 	GPIO_PORTB_DATA_R = 0x00;		// Turns off LEDs
 	GPIO_PORTE_DATA_R = digit;		// Selects segment to turn on
 	GPIO_PORTB_DATA_R = ~values[value];	// Turns on number in selected digit
-		
+	delay();	
 	 } 
 
 int main(void)
