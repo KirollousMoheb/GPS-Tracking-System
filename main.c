@@ -14,7 +14,13 @@ void delay(void){
 	time--;
   }
 }
+double getInDegree(double value) {
+    int degree = (int)value / 100;
+    double minutes = value-(double)degree*100;
+    return (degree+ (minutes/60));
 
+
+}
 void InitPortE(){      // Function to initialize port E
 	
 	SYSCTL_RCGCGPIO_R|= 0x10;  
