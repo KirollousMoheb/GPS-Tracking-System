@@ -29,6 +29,25 @@ double degToRad(double degree) {
     return degree * (pi / 180.0);
 }
 
+
+// function to calculate distance between two points using data given from the GPS
+int calculateDistance(double latitude1,double longitude1,double latitude2,double longitude2) {
+    double R = 6371000;       //earth's radius in meters
+    double lat1 = degToRad(valueToDegree(latitude1));
+    double long1 = degToRad(valueToDegree(longitude1));
+    double lat2 = degToRad(valueToDegree(latitude2));
+    double long2 = degToRad(valueToDegree(longitude2));
+    double latdiff = lat2 - lat1;
+    double longdiff = long2 - long1;
+
+    double a= pow(sin(latdiff/2),2)+cos(lat1)*cos(lat2)*pow(sin(longdiff/2),2); // Haversine formula: a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+    distance= R * c;    //in meters
+    return distance;
+}
+
+
+
 void InitPortE(){      // Function to initialize port E
 	
 	SYSCTL_RCGCGPIO_R|= 0x10;  
