@@ -5,7 +5,7 @@
 unsigned char segment1,segment2,segment3;
 unsigned char values[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
 double distance=179;//dumy number
-double latitude1,longitude1,latitude2,longitude2;
+double latitude1=0.0,longitude1=0.0,latitude2=0.0,longitude2=0.0;
 void SystemInit(){};
 
 
@@ -33,10 +33,10 @@ double degToRad(double degree) {
 // function to calculate distance between two points using data given from the GPS
 double calculateDistance(double latitude1,double longitude1,double latitude2,double longitude2) {
     double R = 6371000;       //earth's radius in meters
-    double lat1 = degToRad(valueToDegree(latitude1));
-    double long1 = degToRad(valueToDegree(longitude1));
-    double lat2 = degToRad(valueToDegree(latitude2));
-    double long2 = degToRad(valueToDegree(longitude2));
+    double lat1 = degToRad(getInDegree(latitude1));
+    double long1 = degToRad(getInDegree(longitude1));
+    double lat2 = degToRad(getInDegree(latitude2));
+    double long2 = degToRad(getInDegree(longitude2));
     double latdiff = lat2 - lat1;
     double longdiff = long2 - long1;
 
@@ -81,7 +81,7 @@ void InitPortB(){
 
 
 
-void RedLedOn(){//Function to turn the red led once the distance exceeded 100m
+void InitPortF(){//Function to turn the red led once the distance exceeded 100m
 	SYSCTL_RCGCGPIO_R|= 0x20;
 	GPIO_PORTF_LOCK_R=0x4C4F434B;
 	GPIO_PORTF_CR_R |= 0x0E;                 
@@ -90,7 +90,7 @@ void RedLedOn(){//Function to turn the red led once the distance exceeded 100m
 	GPIO_PORTF_DIR_R |= 0x0E;          
 	GPIO_PORTF_PUR_R = 0x00;                
 	GPIO_PORTF_DEN_R |= 0x0E;
-	GPIO_PORTF_DATA_R|= 0x02;
+	
 }
 
 void SplitDistance(double distance){
@@ -117,7 +117,7 @@ int main(void)
 {			 	
 	 InitPortE();
 	 InitPortB();
-	
+	 InitPortF();	
 	while(1)
 		 {
 		//distance+=calculateDistance( latitude1, longitude1, latitude2, longitude2)
@@ -127,7 +127,7 @@ int main(void)
 		show(2,segment1);
 		
 		if(distance>100){
-		    RedLedOn();
+		    GPIO_PORTF_DATA_R|= 0x02;
 		 }
 		   }
 		
