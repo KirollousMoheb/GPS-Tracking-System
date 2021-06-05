@@ -4,7 +4,7 @@
 #define pi 3.14159265358979323846
 unsigned char segment1,segment2,segment3;
 unsigned char values[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
-int distance=179;//dumy number
+double distance=179;//dumy number
 double latitude1,longitude1,latitude2,longitude2;
 void SystemInit(){};
 
@@ -31,7 +31,7 @@ double degToRad(double degree) {
 
 
 // function to calculate distance between two points using data given from the GPS
-int calculateDistance(double latitude1,double longitude1,double latitude2,double longitude2) {
+double calculateDistance(double latitude1,double longitude1,double latitude2,double longitude2) {
     double R = 6371000;       //earth's radius in meters
     double lat1 = degToRad(valueToDegree(latitude1));
     double long1 = degToRad(valueToDegree(longitude1));
@@ -42,8 +42,7 @@ int calculateDistance(double latitude1,double longitude1,double latitude2,double
 
     double a= pow(sin(latdiff/2),2)+cos(lat1)*cos(lat2)*pow(sin(longdiff/2),2); // Haversine formula: a = sin²(Δφ/2) + cos φ1 ⋅ cos φ2 ⋅ sin²(Δλ/2)
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    distance= R * c;    //in meters
-    return distance;
+    return R*c;   //in meters
 }
 
 
@@ -119,7 +118,7 @@ int main(void)
 	
 	while(1)
 		 {
-		
+		//distance+=calculateDistance( latitude1, longitude1, latitude2, longitude2)
 		SplitDistance(distance);
 		show(8,segment3);
 		show(4,segment2);
