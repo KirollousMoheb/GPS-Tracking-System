@@ -93,13 +93,15 @@ void RedLedOn(){//Function to turn the red led once the distance exceeded 100m
 	GPIO_PORTF_DATA_R|= 0x02;
 }
 
-void SplitDistance(int distance){
-	segment1 = distance%10;		//Copies value in distance, divides it by 10 and then keeps remainder
-	distance /= 10;			//Dividing value in distance by 10 shifts it by one decimal
-	segment2 = distance%10;
-	distance /= 10;
-	segment3 = distance%10;		//Most left 7 Segments
-	distance /= 10;
+void SplitDistance(double distance){
+	int d= (int)distance;
+	
+	segment1 = d % 10;		//Copies value in distance, divides it by 10 and then keeps remainder in segment 1 ( most righ 7 segment)
+	d /= 10;			//Dividing value in distance by 10 shifts it by one decimal
+	segment2 = d % 10;              
+	d /= 10;
+	segment3 = d % 10;		//Most left 7 Segment
+	d /= 10;
     
 }
 
