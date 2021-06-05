@@ -49,14 +49,14 @@ double calculateDistance(double latitude1,double longitude1,double latitude2,dou
 
 void InitPortE(){      // Function to initialize port E
 	
-	SYSCTL_RCGCGPIO_R|= 0x10;  
+	SYSCTL_RCGCGPIO_R|= 0x10;            //enable clock for portE
 	GPIO_PORTE_LOCK_R=0x4C4F434B;
 	GPIO_PORTE_CR_R = 0x0E;                
-	GPIO_PORTE_AMSEL_R = 0x00;        
+	GPIO_PORTE_AMSEL_R = 0x00;          
 	GPIO_PORTE_PCTL_R = 0x00;   
-	GPIO_PORTE_DIR_R = 0x0E;     //PE3==>third 7segments  , PE2==>Second 7segments, PE1==>first 7segments  
+	GPIO_PORTE_DIR_R = 0x0E;     //PE3==>third 7segments  , PE2==>Second 7segments, PE1==>first 7segments   // make ports PE1,PE2,PE3 output ports
 	GPIO_PORTE_PUR_R = 0x00;              
-	GPIO_PORTE_DEN_R = 0x0E;  
+	GPIO_PORTE_DEN_R = 0x0E;        //make ports PE1,PE2,PE3 digital ports
 
 }
 
