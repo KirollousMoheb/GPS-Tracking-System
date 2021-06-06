@@ -90,9 +90,9 @@ void InitPortF(){//Function to turn the red led once the distance exceeded 100m
 	GPIO_PORTF_CR_R |= 0x0E;                 
 	GPIO_PORTF_AMSEL_R = 0x00;        
 	GPIO_PORTF_PCTL_R = 0x00;    
-	GPIO_PORTF_DIR_R |= 0x0E;          
+	GPIO_PORTF_DIR_R |= 0x0E;//set all the three built in leds as outputs          
 	GPIO_PORTF_PUR_R = 0x00;                
-	GPIO_PORTF_DEN_R |= 0x0E;
+	GPIO_PORTF_DEN_R |= 0x0E;//set all the three built in leds to be digitally enabled if we wanted to turn any of them on
 	
 }
 
@@ -130,7 +130,7 @@ int main(void)
 		show(2,segment1);
 		
 		if(distance>100){
-		    GPIO_PORTF_DATA_R|= 0x02;
+		    GPIO_PORTF_DATA_R|= 0x02;//Turn on the red led if the distance exceeded 100 meters
 		 }
 		   }
 		
