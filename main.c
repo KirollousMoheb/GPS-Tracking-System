@@ -62,16 +62,19 @@ void InitPortE(){      // Function to initialize port E
 
 
 //PORTB initialization
+//this port is used for initialization of 7-segments
+// 7-segments consists of 7 LEDs each led is connected to a certain pin to on or off LED
+// in our system pins is connected from B0 to B6
 void InitPortB(){
 				
-	SYSCTL_RCGCGPIO_R |= 0x02;
-        GPIO_PORTB_LOCK_R=0x4C4F434B; 	
-	GPIO_PORTB_CR_R = 0x7F;                 
-	GPIO_PORTB_AMSEL_R = 0x00;        
-	GPIO_PORTB_PCTL_R = 0x00;    
-	GPIO_PORTB_DIR_R = 0x7F;          			
+	SYSCTL_RCGCGPIO_R |= 0x02;         //enable clock for PORTB
+        GPIO_PORTB_LOCK_R=0x4C4F434B; 	   
+	GPIO_PORTB_CR_R = 0x7F;            //enable changes to pins from B0 to B6     
+	GPIO_PORTB_AMSEL_R = 0x00;         //disable using pins as analog input
+	GPIO_PORTB_PCTL_R = 0x00;          
+	GPIO_PORTB_DIR_R = 0x7F;           //set pins from B0 to B6 of PORTB to be output			
 	GPIO_PORTB_PUR_R = 0x00;                
-	GPIO_PORTB_DEN_R = 0x7F;     
+	GPIO_PORTB_DEN_R = 0x7F;           //set pins from B0 to B6 to be digital 
 
 }
 
