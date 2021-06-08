@@ -47,6 +47,8 @@ double calculateDistance(double latitude1,double longitude1,double latitude2,dou
 void UART2_Init(){
 		SYSCTL_RCGCUART_R|=SYSCTL_RCGCUART_R2;   // clock enable UART2  =>   |=1
 		SYSCTL_RCGCGPIO_R|=SYSCTL_RCGCGPIO_R3;  //enable clock to PORTD  =>   |=1
+	        GPIO_PORTD_LOCK_R=0x4C4F434B; 	        
+		GPIO_PORTD_CR_R = 0xC0;  
 		UART2_CTL_R&=~UART_CTL_UARTEN;          //disable UART2
 	
 		UART2_FBRD_R =11;			// fraction part
@@ -54,6 +56,10 @@ void UART2_Init(){
 	
 		UART2_LCRH_R =(UART_LCRH_WLEN_8 |UART_LCRH_FEN);          //(0x60|0x10)
 		UART2_CTL_R|=(UART_CTL_UARTEN| UART_CTL_TXE  | UART_CTL_RXE );     // enable UART2, TXE, RXE  =>  |=0x301
+	
+                GPIO_PORTD_AFSEL_R=0XC0;                // use PD6,Pd7 alternate function 
+		GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&~0xFF000000)|(GPIO_PCTL_PD6_U2RX |GPIO_PCTL_PD7_U2TX );
+		GPIO_PORTD_DEN_R|=0XC0;                //make PD6  , PD7 as digital
 
 }
 
