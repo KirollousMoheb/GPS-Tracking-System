@@ -57,7 +57,7 @@ void UART2_Init(){
 		UART2_LCRH_R =(UART_LCRH_WLEN_8 |UART_LCRH_FEN);          //(0x60|0x10)
 		UART2_CTL_R|=(UART_CTL_UARTEN| UART_CTL_TXE  | UART_CTL_RXE );     // enable UART2, TXE, RXE  =>  |=0x301
 	
-                GPIO_PORTD_AFSEL_R=0XC0;                // use PD6,Pd7 alternate function 
+                GPIO_PORTD_AFSEL_R=0XC0;                // use PD6,PD7 alternate function 
 		GPIO_PORTD_PCTL_R = (GPIO_PORTD_PCTL_R&~0xFF000000)|(GPIO_PCTL_PD6_U2RX |GPIO_PCTL_PD7_U2TX );
 		GPIO_PORTD_DEN_R|=0XC0;                //make PD6  , PD7 as digital
 
