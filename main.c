@@ -44,6 +44,18 @@ double calculateDistance(double latitude1,double longitude1,double latitude2,dou
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return R*c;   //in meters
 }
+void UART2_Init(){
+		SYSCTL_RCGCUART_R|=SYSCTL_RCGCUART_R2;   // clock enable UART2  =>   |=1
+		SYSCTL_RCGCGPIO_R|=SYSCTL_RCGCGPIO_R3;  //enable clock to PORTD  =>   |=1
+		UART2_CTL_R&=~UART_CTL_UARTEN;          //disable UART2
+	
+		UART2_FBRD_R =11;			// fraction part
+		UART2_IBRD_R=104;			//    16MHz/16 = 1MHz,    1MHz/104 = 9600 baud rate
+	
+		UART2_LCRH_R =(UART_LCRH_WLEN_8 |UART_LCRH_FEN);          //(0x60|0x10)
+		UART2_CTL_R|=(UART_CTL_UARTEN| UART_CTL_TXE  | UART_CTL_RXE );     // enable UART2, TXE, RXE  =>  |=0x301
+
+}
 
 
 
