@@ -75,6 +75,26 @@ char GetCharNonBlocking(){
 		
 }
 
+void parseGpsValue(){
+		int i=0;
+		token=strtok(GPS,",");
+		while(token!=NULL){
+			strcpy(parsedValue[i],token);
+			 token = strtok(NULL, ",");
+			i++;	
+		}
+		if(strcmp(parsedValue[1],"A")==0){
+			
+				latitude1=atof(parsedValue[2]);
+				longitude1=atof(parsedValue[4]);
+				speed=atof(parsedValue[6]);
+			
+			
+			
+			
+		}
+}
+
 
 void InitPortE(){      // Function to initialize port E
 	
