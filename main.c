@@ -62,7 +62,10 @@ void UART2_Init(){
 		GPIO_PORTD_DEN_R|=0XC0;                //make PD6  , PD7 as digital
 
 }
+char charIsAvailable(){
 
+	return ((UART2_FR_R &UART_FR_RXFE)==UART_FR_RXFE)?0:1;
+}
 
 
 void InitPortE(){      // Function to initialize port E
