@@ -66,6 +66,14 @@ char charIsAvailable(){
 
 	return ((UART2_FR_R &UART_FR_RXFE)==UART_FR_RXFE)?0:1;
 }
+char GetCharNonBlocking(){
+	if(charIsAvailable()==1){
+		return (char)(UART2_DR_R &0XFF);
+	}else{
+			return (char)(-1);
+	}
+		
+}
 
 
 void InitPortE(){      // Function to initialize port E
