@@ -89,7 +89,14 @@ void parseGpsValue(){
 				longitude1=atof(parsedValue[4]);
 				speed=atof(parsedValue[6]);
 			
+			if(strcmp(parsedValue[3],"S")==0){
 			
+					latitude1=-atof(parsedValue[2]);
+			}
+			if(strcmp(parsedValue[5],"W")==0){
+			
+					longitude1=-atof(parsedValue[4]);
+			}	
 			
 			
 		}
