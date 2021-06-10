@@ -1,11 +1,16 @@
 #include "stdint.h"
 #include "tm4c123gh6pm.h"
 #include <math.h>
+#include <string.h>
+#include <stdlib.h>
 #define pi 3.14159265358979323846
 unsigned char segment1,segment2,segment3;
 unsigned char values[10] = {0x40,0x79,0x24,0x30,0x19,0x12,0x02,0x78,0x00,0x10};
-double distance=179;//dumy number
+double distance=0;
+char parsedValue[12][20],GPS[100],c0,*token;
 double latitude1=0.0,longitude1=0.0,latitude2=0.0,longitude2=0.0;
+double speed=0.0;
+int i=0;
 void SystemInit(){};
 
 
