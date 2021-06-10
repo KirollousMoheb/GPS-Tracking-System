@@ -107,7 +107,36 @@ void parseGpsValue(){
 		}
 }
 
+void readGPS(){
+	char c1,c2,c3,c4,c5,c6,c7;
+	while(!charIsAvailable()){};
+   c0=GetCharNonBlocking();
+    if(c0=='$'){
+        while(!charIsAvailable()){};
+           c1=GetCharNonBlocking();
+        if(c1=='G'){
+            while(!charIsAvailable()){};
+              c2=GetCharNonBlocking();
+            if(c2=='P'){
+                while(!charIsAvailable()){};
+                  c3=GetCharNonBlocking();
+                if(c3=='R'){
+                    while(!charIsAvailable()){};
+                      c4=GetCharNonBlocking();
+                    if(c4=='M'){
+                        while(!charIsAvailable()){};
+                          c5=GetCharNonBlocking();
+                        if(c5=='C'){
+                            while(!charIsAvailable()){};
+                              c6=GetCharNonBlocking();
+                            if(c6==','){
+                                while(!charIsAvailable()){};
+                                  c7=GetCharNonBlocking();
 
+				}
+																																																																	
+	}}}}}}}	
+					
 void InitPortE(){      // Function to initialize port E
 	
 	SYSCTL_RCGCGPIO_R|= 0x10;            //enable clock for portE
