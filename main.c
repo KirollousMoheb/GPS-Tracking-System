@@ -10,6 +10,7 @@ double distance=0;
 char parsedValue[12][20],GPS[100],c0,*token;
 double latitude1=0.0,longitude1=0.0,latitude2=0.0,longitude2=0.0;
 double speed=0.0;
+char flag=1;
 int i=0;
 void SystemInit(){};
 
@@ -250,4 +251,5 @@ int main(void)
 		latitude2=latitude1;
 		longitude2=longitude1;
 		
+	}
 }
