@@ -132,10 +132,16 @@ void readGPS(){
                             if(c6==','){
                                 while(!charIsAvailable()){};
                                   c7=GetCharNonBlocking();
-
-				}
+				  strcpy(GPS, "");
+				  i = 0;
+       				  while(c7!='*'){
+        			  GPS[i]=c7;
+        			  while(!charIsAvailable());
+        			  c7=GetCharNonBlocking();
+        			  i++;
 																																																																	
 	}}}}}}}	
+    }
 					
 void InitPortE(){      // Function to initialize port E
 	
