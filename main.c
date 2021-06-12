@@ -140,7 +140,8 @@ void readGPS(){
         			  c7=GetCharNonBlocking();
         			  i++;
 																																																																	
-	}}}}}}}	
+		}}}}}}}
+   	 }
     }
 					
 void InitPortE(){      // Function to initialize port E
@@ -216,18 +217,37 @@ int main(void)
 {			 	
 	 InitPortE();
 	 InitPortB();
-	 InitPortF();	
+	 InitPortF();
+	 UART2_Init();
 	while(1)
 		 {
-		//distance+=calculateDistance( latitude1, longitude1, latitude2, longitude2)
+		
+		readGPS();
+		
+		if(flag==1){
+			latitude2=latitude1;
+			longitude2=longitude1;						 
+				 }
+		                                               //distance+=calculateDistance( latitude1, longitude1, latitude2, longitude2)
 		SplitDistance(distance);
+		
+		if(speed>0.8){
+			distance+=calculateDistance(latitude1,longitude1,latitude2,longitude2);
+				}
 		show(8,segment3);
 		show(4,segment2);
 		show(2,segment1);
-		
-		if(distance>100){
-		    GPIO_PORTF_DATA_R|= 0x02;//Turn on the red led if the distance exceeded 100 meters
+		 
+		if(!(GPIO_PORTF_DATA_R & 0x10)&&distance>=100){ //turn on the led if the push button on pf4 pressed and the distance more than 100
+			while(1) { 
+		GPIO_PORTF_DATA_R|= 0x02;                       //Turn on the red led if the distance exceeded 100 meters
+		show(8,segment3);
+                show(4,segment2);
+                show(2,segment1);
 		 }
 		   }
+		flag=0;
+		latitude2=latitude1;
+		longitude2=longitude1;
 		
 }
