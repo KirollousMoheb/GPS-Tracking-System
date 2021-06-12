@@ -214,8 +214,35 @@ void show(int digit, char value){
 	delay();	
 	 } 
 
+void Sys_tick_Init(){
+	NVIC_ST_RELOAD_R=80000;
+	NVIC_ST_CTRL_R=7;
+	__enable_irq();
+}
+
+
+void SysTick_Handler(){
+	if(counter==0){
+		show(8,segment3);
+		counter++;
+	}
+	if(counter==1){
+		show(4,segment2);
+		counter++;
+	}
+	if(counter==2){
+		show(2,segment1);
+		counter=0 ;
+	}
+						
+}
+
+
+
+
 int main(void)
-{			 	
+{			
+	 Sys_tick_Init();
 	 InitPortE();
 	 InitPortB();
 	 InitPortF();
@@ -235,16 +262,11 @@ int main(void)
 		if(speed>0.8){
 			distance+=calculateDistance(latitude1,longitude1,latitude2,longitude2);
 				}
-		show(8,segment3);
-		show(4,segment2);
-		show(2,segment1);
-		 
+
 		if(!(GPIO_PORTF_DATA_R & 0x10)&&distance>=100){ //turn on the led if the push button on pf4 pressed and the distance more than 100
 			while(1) { 
 		GPIO_PORTF_DATA_R|= 0x02;                       //Turn on the red led if the distance exceeded 100 meters
-		show(8,segment3);
-                show(4,segment2);
-                show(2,segment1);
+
 		 }
 		   }
 		flag=0;
