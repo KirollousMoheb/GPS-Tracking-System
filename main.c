@@ -13,7 +13,7 @@ double speed=0.0;
 char flag=1;
 int i=0;
 void SystemInit(){};
-
+int counter = 0;
 
 void delay(void){
 	
