@@ -213,11 +213,11 @@ void show(int digit, char value){
 	GPIO_PORTB_DATA_R = ~values[value];	// Turns on number in selected digit
 	delay();	
 	 } 
-
+//initializing Systick-timer of tiva c
 void Sys_tick_Init(){
-	NVIC_ST_RELOAD_R=80000;
-	NVIC_ST_CTRL_R=7;
-	__enable_irq();
+	NVIC_ST_RELOAD_R=80000; //timer counter expressed in ticks each tick-> 62.5ns so we need 5ms->80000 when this ticks count down to 0 -> calling SysTick_Handler function
+	NVIC_ST_CTRL_R=7; // bit0, bit1, bit2  are all set to enable interrupt and to make source of clock is that of tiva and enable timer
+	__enable_irq(); //enable intterupt
 }
 
 
