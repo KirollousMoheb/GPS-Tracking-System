@@ -23,7 +23,7 @@ void delay(void){
 	time--;
   }
 }
-double getInDegree(double value) {
+double getInDegree(double value) {    
     int degree = (int)value / 100;
     double minutes = value-(double)degree*100;
     return (degree+ (minutes/60));
@@ -31,7 +31,7 @@ double getInDegree(double value) {
 
 }
 
-double degToRad(double degree) {
+double degToRad(double degree) {    // function to convert from degree to radian
     return degree * (pi / 180.0);
 }
 
@@ -50,7 +50,8 @@ double calculateDistance(double latitude1,double longitude1,double latitude2,dou
     double c = 2 * atan2(sqrt(a), sqrt(1 - a));
     return R*c;   //in meters
 }
-void UART2_Init(){
+//function to initialize UART2 [PD6,PD7]
+void UART2_Init(){  
 		SYSCTL_RCGCUART_R|=SYSCTL_RCGCUART_R2;   // clock enable UART2  =>   |=1
 		SYSCTL_RCGCGPIO_R|=SYSCTL_RCGCGPIO_R3;  //enable clock to PORTD  =>   |=1
 	        GPIO_PORTD_LOCK_R=0x4C4F434B; 	        
@@ -68,7 +69,7 @@ void UART2_Init(){
 		GPIO_PORTD_DEN_R|=0XC0;                //make PD6  , PD7 as digital
 
 }
-char charIsAvailable(){
+char charIsAvailable(){  //function to check if the fifo has received any characters
 
 	return ((UART2_FR_R &UART_FR_RXFE)==UART_FR_RXFE)?0:1;
 }
@@ -76,7 +77,7 @@ char GetCharNonBlocking(){
 	if(charIsAvailable()==1){
 		return (char)(UART2_DR_R &0XFF);
 	}else{
-			return (char)(-1);
+	   return (char)(-1);
 	}
 		
 }
