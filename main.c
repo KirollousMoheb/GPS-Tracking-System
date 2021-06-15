@@ -161,7 +161,7 @@ void InitPortE(){      // Function to initialize port E
 
 
 //PORTB initialization
-//this port is used for initialization of 7-segments
+//is used for initialization of 7-segments
 // 7-segments consists of 7 LEDs each led is connected to a certain pin to on or off LED
 // in our system pins is connected from B0 to B6
 void InitPortB(){
